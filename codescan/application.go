@@ -382,21 +382,12 @@ func (s *scanCtx) FindEnumValues(pkg *packages.Package, enumName string) (list [
 
 									// build the enum description
 									var (
-										desc     = &strings.Builder{}
-										namesLen = len(vs.Names)
+										desc = &strings.Builder{}
 									)
-									desc.WriteString(fmt.Sprintf("%v ", blValue))
-									for i, name := range vs.Names {
-										desc.WriteString(name.Name)
-										if i < namesLen-1 {
-											desc.WriteString(" ")
-										}
-									}
+									desc.WriteString(fmt.Sprintf("`%v`:", blValue))
+
 									if vs.Doc != nil {
 										docListLen := len(vs.Doc.List)
-										if docListLen > 0 {
-											desc.WriteString(" ")
-										}
 										for i, doc := range vs.Doc.List {
 											if doc.Text != "" {
 												var text = strings.TrimPrefix(doc.Text, "//")
@@ -407,7 +398,7 @@ func (s *scanCtx) FindEnumValues(pkg *packages.Package, enumName string) (list [
 											}
 										}
 									}
-									descList = append(descList, desc.String())
+									descList = append(descList, desc.String(), "\n")
 								}
 							}
 						}

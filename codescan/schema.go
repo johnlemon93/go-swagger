@@ -395,7 +395,7 @@ func (s *schemaBuilder) buildFromType(tpe types.Type, tgt swaggerTypable) error 
 					_ = swaggerSchemaForType(enumTypeName, tgt)
 				}
 				if len(enumDesces) > 0 {
-					tgt.WithEnumDescription(strings.Join(enumDesces, "\n"))
+					tgt.WithEnumDescription("\n" + strings.Join(enumDesces, "\n"))
 				}
 				return nil
 			}
