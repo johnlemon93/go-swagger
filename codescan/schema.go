@@ -852,6 +852,7 @@ func (s *schemaBuilder) buildFromStruct(decl *entityDecl, st *types.Struct, sche
 		// 2. field with different name removes tag
 		// so we need to save both tag&name
 		seen[name] = fld.Name()
+		addExtension(&ps.VendorExtensible, "x-order", float64(i))
 		tgt.Properties[name] = ps
 	}
 
